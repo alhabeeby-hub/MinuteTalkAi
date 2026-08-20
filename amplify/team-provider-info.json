@@ -1,0 +1,14 @@
+{
+  "name": "minutetalk-ai",
+  "version": "1.0.0",
+  "plugins": [
+    "@aws-amplify/amplify-cli-core"
+  ],
+  "projectConfiguration": {
+    "version": 3,
+    "frontend": "react",
+    "framework": "vite"
+  },
+  "defaultEditor": "code",
+  "appId": "minutetalkai"
+}

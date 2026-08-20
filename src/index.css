@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+ * MinuteTalk AI - Custom Styles
+ * 
+ * This file contains custom styling beyond Tailwind utilities.
+ * The design follows a clean, modern aesthetic with:
+ * - Gradient backgrounds for visual appeal
+ * - Smooth transitions for interactive elements
+ * - Timer animations for engagement
+ */
+
+/* Base styles */
+body {
+  @apply bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+/* Custom component styles */
+@layer components {
+  /* Category card styles */
+  .category-card {
+    @apply relative overflow-hidden rounded-xl p-6 cursor-pointer
+           transition-all duration-300 ease-out
+           border border-slate-700/50
+           hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/20
+           bg-slate-800/50 backdrop-blur-sm;
+  }
+
+  .category-card:hover {
+    @apply transform -translate-y-1;
+  }
+
+  .category-card.selected {
+    @apply border-primary-500 bg-primary-500/20 shadow-lg shadow-primary-500/30;
+  }
+
+  /* Timer display */
+  .timer-display {
+    @apply font-mono text-6xl md:text-8xl font-bold tabular-nums;
+    @apply bg-gradient-to-r from-accent-400 to-primary-400 bg-clip-text text-transparent;
+  }
+
+  .timer-display.warning {
+    @apply text-red-400 bg-none;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg font-semibold
+           bg-gradient-to-r from-primary-600 to-primary-500
+           hover:from-primary-500 hover:to-primary-400
+           text-white shadow-lg shadow-primary-500/30
+           transition-all duration-200 ease-out
+           hover:shadow-xl hover:shadow-primary-500/40
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-lg font-medium
+           bg-slate-700 hover:bg-slate-600
+           text-slate-200 border border-slate-600
+           transition-all duration-200 ease-out
+           hover:border-slate-500;
+  }
+
+  /* Hint card */
+  .hint-card {
+    @apply p-4 rounded-lg bg-accent-900/50 border border-accent-700/50
+           backdrop-blur-sm;
+  }
+
+  /* Topic display */
+  .topic-display {
+    @apply text-2xl md:text-3xl font-bold text-center
+           bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent;
+  }
+}
+
+/* Animation keyframes */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-500;
+}

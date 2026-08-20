@@ -1,0 +1,20 @@
+{
+  "name": "minutetalk-ai-amplify",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.121.0",
+    "constructs": "^10.3.0",
+    "source-map-support": "^0.5.21"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/source-map-support": "^0.5.10",
+    "aws-cdk": "^2.121.0",
+    "typescript": "^5.3.0"
+  }
+}
