@@ -1,5 +1,8 @@
-# Development dependencies for MinuteTalk AI Backend
+# MinuteTalk AI Backend - Development & Testing dependencies
 # Install with: pip install -r requirements-dev.txt
+#
+# This includes everything in requirements.txt plus tooling for
+# local development, testing, and linting (NOT deployed to Lambda).
 
 -r requirements.txt
 
@@ -8,11 +11,10 @@ pytest>=7.4.0
 pytest-cov>=4.1.0
 httpx>=0.25.0
 
-# Development
-python-dotenv>=1.0.0
+# Development server with reload/watch support
 uvicorn[standard]>=0.27.0
 
-# Linting
+# Linting / formatting
 flake8>=6.1.0
 black>=23.0.0
 isort>=5.12.0

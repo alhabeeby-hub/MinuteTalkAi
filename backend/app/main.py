@@ -40,12 +40,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Configure CORS - allow all origins for demo purposes
-# In production, restrict this to your frontend domain
+# Configure CORS - allow all origins for demo purposes.
+# NOTE: allow_credentials is left as False because it is incompatible with
+# allow_origins=["*"] (browsers reject `Access-Control-Allow-Origin: *` when
+# credentials are enabled). This app does not use cookies or auth tokens.
+# In production, restrict allow_origins to your frontend domain.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

@@ -6,6 +6,10 @@ dist/
 build/
 *.egg-info/
 
+# Lambda packaging artifacts (built by backend/build_package.py)
+backend/package/
+backend/deployment.zip
+
 # Python
 __pycache__/
 *.py[cod]
@@ -46,3 +50,6 @@ htmlcov/
 # Amplify
 amplify/#current-cloud-backend/
 amplify/.config/local-*
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat

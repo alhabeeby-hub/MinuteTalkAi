@@ -43,8 +43,13 @@ An impromptu speaking trainer where users pick an interest area, receive a conci
 6. **Add API URL to Frontend**
    - After backend deploys, copy the API endpoint URL
    - Add it as `VITE_API_URL` in frontend environment variables
+   - Redeploy the frontend (VITE_ vars are baked in at build time)
 
 **Done!** 🎉 Your app is live!
+
+> 📖 **Full step-by-step guide** (frontend + Lambda backend + API Gateway via
+> CloudShell/CDK) is in [DEPLOYMENT.md](./DEPLOYMENT.md), including
+> troubleshooting for the `pydantic_core` import error and "Failed to fetch".
 
 ## 📁 Project Structure
 
@@ -62,8 +67,9 @@ minutetalk-ai/
 │   ├── tests/
 │   │   ├── __init__.py
 │   │   └── test_api.py   # Backend tests
-│   ├── requirements.txt  # Production dependencies
-│   ├── requirements-dev.txt # Development dependencies
+│   ├── requirements.txt  # Production (Lambda) dependencies
+│   ├── requirements-dev.txt # Development/testing dependencies
+│   ├── build_package.py  # Builds Linux-targeted deployment.zip
 │   ├── pytest.ini
 │   └── .env.example      # Backend env template
 ├── src/                   # React frontend

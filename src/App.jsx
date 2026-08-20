@@ -99,6 +99,12 @@ function App() {
     setExplanation('')
     setShowExplanation(false)
 
+    if (!API_URL) {
+      setError('API URL is not configured. Set VITE_API_URL in Amplify environment variables and redeploy.')
+      setIsLoading(false)
+      return
+    }
+
     try {
       const response = await fetch(`${API_URL}/api/topic`, {
         method: 'POST',

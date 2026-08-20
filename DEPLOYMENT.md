@@ -52,16 +52,18 @@ AWS CloudShell is a browser-based terminal that has Python, Node.js, and your AW
    git clone https://github.com/YOUR_GITHUB_USERNAME/MinuteTalkAi.git
    cd MinuteTalkAi
    ```
-3. **Package the Python Backend**:
-   Run the following commands to zip the FastAPI application:
+3. **Package the Python Backend (Linux-targeted)**:
+   > ⚠️ **Important**: Lambda runs Linux x86_64 + Python 3.11. A plain
+   > `pip install -t` installs binaries for *this* machine and causes the
+   > `No module named 'pydantic_core._pydantic_core'` import error. Use the
+   > provided script, which downloads the correct Linux wheels automatically.
    ```bash
    cd backend
-   pip install -r requirements.txt -t ./package
-   cp -r app ./package/
-   cd package
-   zip -r ../deployment.zip .
-   cd ../..
+   python build_package.py
+   cd ..
    ```
+   This produces `backend/deployment.zip` with the dependencies + `app/` source.
+
 4. **Deploy the CDK Stack**:
    Run the following commands to build and deploy the AWS resources to your account:
    ```bash
@@ -101,6 +103,33 @@ Now that the backend is live, we need to inject the URL into the frontend.
 1. Select a category (e.g., **Technology**) on your live site.
 2. Verify that a topic generates successfully.
 3. Click **Explain Topic** to verify the AI coaching fallback works.
+
+---
+
+## 🛠️ Troubleshooting
+
+### `No module named 'pydantic_core._pydantic_core'` (Lambda)
+
+**Cause:** `deployment.zip` was built with `pip install -t ./package`, which
+installed `pydantic-core`'s native binary for the *wrong* platform (your
+Windows/Python 3.14 machine or CloudShell's Python) instead of Lambda's Linux
+x86_64 / Python 3.11.
+
+**Fix:**
+1. Run the Linux-targeted packaging script: `cd backend && python build_package.py`
+2. Redeploy: `cd amplify && npm run build && npx cdk deploy`
+
+### Frontend shows "⚠️ Error / Failed to fetch"
+
+This almost always means the browser could not reach the backend (a network/CORS
+failure), which also happens when the Lambda is broken because the OPTIONS
+preflight request fails. Fix the Lambda first, then verify:
+
+1. In the Amplify console, confirm `VITE_API_URL` is set to the API Gateway
+   invoke URL **without a trailing slash** (e.g. `https://abc123.execute-api.us-east-1.amazonaws.com`).
+2. **Redeploy** the Amplify app after changing `VITE_API_URL` — it is baked in at build time.
+3. Confirm the API is up: open `https://<invoke-url>/api/health` in a browser.
+   It should return `{"status":"healthy",...}`.
 
 ---
 

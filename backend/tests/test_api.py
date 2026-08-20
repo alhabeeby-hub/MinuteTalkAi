@@ -14,8 +14,10 @@ from unittest.mock import patch, Mock
 from fastapi.testclient import TestClient
 
 
-# Set a dummy API key before importing the app (to avoid warnings)
-os.environ['GROQ_API_KEY'] = 'test_key'
+# Set a dummy API key before importing the app (to avoid warnings).
+# Use setdefault so a REAL key in the environment is respected, which lets
+# the live Groq integration test run via: GROQ_API_KEY=your-key pytest ...
+os.environ.setdefault('GROQ_API_KEY', 'test_key')
 
 from app.main import app, CATEGORY_PROMPTS, FALLBACK_TOPICS
 

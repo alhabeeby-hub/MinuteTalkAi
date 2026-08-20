@@ -1,20 +1,16 @@
-# MinuteTalk AI - Amplify Cloud Build Configuration
+# MinuteTalk AI - Amplify Cloud Build Configuration (FRONTEND ONLY)
 #
-# This file configures how AWS Amplify builds and deploys the application.
-# It handles both the frontend (React) and backend (Python Lambda) deployments.
+# This file configures how AWS Amplify builds and hosts the React frontend.
 #
-# Build Phases:
-# 1. frontend: Install and build the React app
-# 2. backend: Install Python dependencies for Lambda
+# NOTE: The backend (FastAPI + Lambda + API Gateway) is NOT built here. It is
+# deployed separately with CDK — see DEPLOYMENT.md. Amplify Hosting only runs
+# the `frontend` phases below.
 #
-# For more info: https://docs.amplify.aws/cli/teams/overview/
+# For more info: https://docs.aws.amazon.com/amplify/latest/userguide/build-settings.html
 
 version: 1
 frontend:
   phases:
-    # ==========================================
-    # Frontend Build (React + Vite)
-    # ==========================================
     preBuild:
       commands:
         - npm ci
@@ -29,40 +25,3 @@ frontend:
     paths:
       - node_modules/**/*
       - .npm/**/*
-
-# Backend build phase - runs after frontend
-# This packages the Python Lambda function
-backend:
-  phases:
-    build:
-      commands:
-        # Create deployment package for Lambda
-        - echo "Building Lambda function package..."
-        - cd backend
-        - pip install --upgrade pip
-        - pip install -r requirements.txt -t ./package
-        - cp -r app ./package/
-        - cd package
-        - zip -r ../deployment.zip .
-        - echo "Lambda package created successfully"
-  artifacts:
-    baseDirectory: backend
-    files:
-      - 'deployment.zip'
-    # Override the default packaging - we handle it ourselves
-    packege: |
-      cd backend
-      pip install -r requirements.txt -t ./package
-      cp -r app ./package/
-      cd package
-      zip -r ../deployment.zip .
-
-# Settings for environment variables
-# Add your GROQ_API_KEY in the Amplify Console
-env:
-  variables:
-    # Frontend environment variables
-    VITE_API_URL: ''  # Will be set by Amplify post-backend-build
-    
-    # Backend environment variables  
-    GROQ_API_KEY: ''  # Set in Amplify Console
