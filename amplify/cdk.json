@@ -1,0 +1,17 @@
+{
+  "app": "node dist/backend.js",
+  "context": {
+    "@aws-cdk/aws-apigateway:usagePlanKeyOrderInsensitiveId": true,
+    "@aws-cdk/core:stackRelativeExports": true,
+    "@aws-cdk/aws-rds:databaseInsensitiveClusterIdentifier": true,
+    "@aws-cdk/aws-lambda:recognizeVersionProps": true,
+    "@aws-cdk/aws-cloudfront:defaultSecurityPolicyTLSv1.2_2021": true,
+    "@aws-cdk/core:target-debug-log-integration-default-active": true,
+    "@aws-cdk/aws-apigateway:authorizerChangeDeploymentRecreation": true,
+    "@aws-cdk/aws-s3:grantWriteWithoutAcl": true,
+    "@aws-cdk/aws-ecs-patterns:useCertificate": true,
+    "@aws-cdk/aws-rds:preventRenderingDeprecatedCredentials": true,
+    "@aws-cdk/aws-codepipeline:useSrcKeyHelper": true,
+    "@aws-cdk/aws-uuid:trackResources": false
+  }
+}

@@ -24,6 +24,7 @@
 import { 
   Stack, 
   StackProps, 
+  Duration,
   aws_lambda as lambda,
   aws_apigatewayv2 as apigatewayv2,
   aws_apigatewayv2_integrations as integrations,
@@ -78,7 +79,7 @@ export class MinuteTalkBackendStack extends Stack {
           exclude: ['.pytest_cache', '__pycache__', '*.pyc', '.git'],
         }
       ),
-      timeout: lambda.Duration.seconds(30),
+      timeout: Duration.seconds(30),
       memorySize: 512,
       description: 'MinuteTalk AI FastAPI Backend Function',
       // Environment variables for the Lambda function
@@ -108,7 +109,7 @@ export class MinuteTalkBackendStack extends Stack {
         allowHeaders: ['*'],
         allowMethods: [apigatewayv2.CorsHttpMethod.ANY],
         allowOrigins: ['*'],
-        maxAge: lambda.Duration.days(1),
+        maxAge: Duration.days(1),
       },
     });
 
@@ -139,7 +140,7 @@ export class MinuteTalkBackendStack extends Stack {
      * Output the API endpoint URL for use in the frontend
      */
     new CfnOutput(this, 'ApiEndpoint', {
-      value: api.url,
+      value: api.url!,
       description: 'The API Gateway endpoint URL',
       exportName: 'MinuteTalkApiEndpoint',
     });
@@ -157,3 +158,14 @@ export class MinuteTalkBackendStack extends Stack {
 
 // Export the stack class for use in CDK
 export { MinuteTalkBackendStack as backendStack };
+
+// Instantiation of the CDK App for manual deployment
+import { App } from 'aws-cdk-lib';
+
+const app = new App();
+new MinuteTalkBackendStack(app, 'MinuteTalkBackendStack', {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT || process.env.AWS_ACCOUNT_ID,
+    region: process.env.CDK_DEFAULT_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1',
+  }
+});

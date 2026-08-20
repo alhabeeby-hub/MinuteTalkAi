@@ -13,7 +13,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "noEmit": true
+    "noEmit": false
   },
   "include": ["backend.ts", "lambda-function.ts"],
   "exclude": ["node_modules"]
