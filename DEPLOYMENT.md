@@ -68,10 +68,11 @@ AWS CloudShell is a browser-based terminal that has Python, Node.js, and your AW
    cd amplify
    npm ci
    npm run build
+   export GROQ_API_KEY="your-groq-api-key"
    npx cdk bootstrap
    npx cdk deploy --require-approval never
    ```
-   *Note: If prompted, type `y` to confirm deployment.*
+   *Note: Replace `"your-groq-api-key"` with your actual Groq API key. If prompted, type `y` to confirm deployment.*
 
 5. **Copy the Invoke URL**:
    Once the CDK deployment finishes, it will print the **ApiEndpoint** URL (e.g., `https://a1b2c3d4.execute-api.us-west-2.amazonaws.com`).
