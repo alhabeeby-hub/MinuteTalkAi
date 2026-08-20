@@ -83,8 +83,8 @@ export class MinuteTalkBackendStack extends Stack {
       description: 'MinuteTalk AI FastAPI Backend Function',
       // Environment variables for the Lambda function
       environment: {
-        // GROQ_API_KEY will be set in Lambda console or Amplify env vars
         PYTHONUNBUFFERED: '1',
+        GROQ_API_KEY: process.env.GROQ_API_KEY || '',
       },
     });
 

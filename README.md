@@ -87,6 +87,7 @@ minutetalk-ai/
 ├── Makefile              # Quick dev commands
 ├── package.json          # Frontend dependencies
 ├── README.md             # Full documentation
+├── DEPLOYMENT.md         # AWS Amplify Deployment Guide
 ├── WORKSHOP.md          # Workshop deployment guide
 └── vite.config.js
 ```
