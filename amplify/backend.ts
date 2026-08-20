@@ -65,7 +65,7 @@ export class MinuteTalkBackendStack extends Stack {
     // Create an asset for the Lambda function code
     // This packages the entire backend directory for deployment
     const lambdaCode = new s3_assets.Asset(this, 'LambdaCodeAsset', {
-      path: path.join(__dirname, '..', 'backend'),
+      path: path.join(__dirname, '..', '..', 'backend'),
     });
 
     // Create the Lambda function
@@ -73,7 +73,7 @@ export class MinuteTalkBackendStack extends Stack {
       runtime: lambda.Runtime.PYTHON_3_11,
       handler: 'app.main.handler',  // Points to Mangum handler in main.py
       code: lambda.Code.fromAsset(
-        path.join(__dirname, '..', 'backend'),
+        path.join(__dirname, '..', '..', 'backend'),
         {
           // Exclude unnecessary files to reduce package size
           exclude: ['.pytest_cache', '__pycache__', '*.pyc', '.git'],
