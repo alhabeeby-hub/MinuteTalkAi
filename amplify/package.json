@@ -1,7 +1,6 @@
 {
   "name": "minutetalk-ai-amplify",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch"
